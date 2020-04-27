@@ -1,0 +1,128 @@
+<h1>Listado de Clientes</h1>
+<hr />
+
+<div class="row">
+
+  <!--  <div class="col-2">
+    <mat-form-field>
+      <mat-label>Cliente</mat-label>
+      <mat-select (selectionChange)="onFilter($event.value)">
+        <mat-option>--</mat-option>
+        <mat-option
+          *ngFor="let cliente of clientes"
+          [value]="cliente.Identificacion"
+        >
+          {{ cliente.Nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+-->
+
+
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>Edad cliente</mat-label>
+        <mat-select (selectionChange)="onFilter('anio', $event.value)">
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let anio of anios" matInput [value]="anio">
+            {{ anio }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>Fecha desde</mat-label>
+        <input matInput [matDatepicker]="fechaInicio" (dateChange)="onFilter('fechaInicio', $event.value)" required/>
+        <mat-datepicker-toggle matSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+        <mat-datepicker #fechaInicio></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>Fecha hasta</mat-label>
+        <input matInput [matDatepicker]="fechaFin" (dateChange)="onFilter('fechaFin', $event.value)" required/>
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="fechaFin"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #fechaFin></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="col text-right">
+    <button routerLink="/cliente/nuevo" class="btn btn-primary">
+      <i class="fa fa-plus"></i>
+      Agregar
+    </button>
+  </div>
+
+
+<table
+  *ngIf="!cargando && clientes.length > 0"
+  class="table mt-3 animated fadeIn faster animated fadeIn faster"
+>
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Identificacion</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">FechaNacimineto</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Direccion</th>
+      <th scope="col">Tools</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cliente of clientesFiltrados | async; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ cliente.Identificacion }}</td>
+      <td>{{ cliente.Nombre }}</td>
+      <td>{{ cliente.Apellido }}</td>
+      <td>{{ cliente.FechaNacimineto }}</td>
+      <td>{{ cliente.Telefono }}</td>
+      <td>{{ cliente.Direccion }}</td>
+
+      <td>
+        <button
+          class="btn btn-info mr-1"
+          [routerLink]="['/cliente', cliente.IdCliente]"
+        >
+          <i class="fa fa-pen"></i>
+        </button>
+
+        <button class="btn btn-danger" (click)="borrarCliente(cliente, i)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div
+  *ngIf="!cargando && clientes.length === 0"
+  class="alert alert-warning text-center mt-3 animated fadeIn faster"
+>
+  <h4 class="alert-heading">No hay registros</h4>
+  <p>
+    <i class="fa fa-exclamation fa-2x"></i>
+  </p>
+</div>
+
+<div
+  *ngIf="cargando"
+  class="alert alert-info text-center mt-3 animated fadeIn faster"
+>
+  <h4 class="alert-heading">Cargando</h4>
+  <p>
+    <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+  </p>
+  <p class="mb-0">
+    Espere por favor
+  </p>
+</div>

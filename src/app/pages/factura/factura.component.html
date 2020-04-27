@@ -1,0 +1,140 @@
+<h1>Factura <small>Nombre del producto</small></h1>
+<hr />
+
+<div class="row text-right">
+  <div class="col">
+    <button class="btn btn-danger" routerLink="/facturas">
+      <i class="fa fa-arrow-left"></i>
+      Regresar
+    </button>
+  </div>
+</div>
+
+<div class="row animated fadeIn faster">
+  <div class="col">
+
+    <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+      <div>
+      
+        <div class="form-group row">
+          <label class="col-2 col-form-label">ID</label>
+          <div class="col">
+            <input
+              class="form-control"
+              type="text"
+              placeholder="ID"
+              formControlName="IdFactura"
+              disabled="disabled"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Cliente</label>
+          <div class="col">
+          <select formControlName="IdCliente">
+            <option [ngValue]="null" disabled>Escoja un cliente</option>
+            <option *ngFor="let cliente of clientes" [ngValue]="cliente.IdCliente">
+             {{ cliente.Nombre }}
+            </option>
+          </select> 
+        </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Fecha Facturacion</label>
+        <div class="col">
+
+          <mat-form-field>
+            <mat-label>Fecha Facturacion</mat-label>
+            <input formControlName="FechaFacturacion" matInput [matDatepicker]="FechaFacturacion" required/>
+            <mat-datepicker-toggle matSuffix [for]="FechaFacturacion"></mat-datepicker-toggle>
+            <mat-datepicker #FechaFacturacion></mat-datepicker>
+          </mat-form-field>
+        
+        </div>
+      </div>
+
+   
+      <div class="row">
+        <label class="col-2 col-form-label">Productos a facturar</label>
+        <div class="col">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Borrar</th>
+              </tr>
+            </thead>
+            <tbody formArrayName="productos">
+              <tr *ngFor="let control of productos.controls; let i = index">
+                <td>{{ i + 1 }}</td>          
+                  <app-sub [myForm]="productos.controls[i]"></app-sub>          
+                <td>
+                  <button class="btn btn-danger" (click)="borrarProducto(i)">
+                    Borrar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <button
+            class="btn btn-primary mt-3 mb-1 btn-block"
+            type="button"
+            (click)="agregarProducto()"
+          >
+            + Agregar
+          </button>
+
+          <button
+            class="btn btn-success mb-4"
+            type="button"
+            (click)="calcularValorFactura()"
+          >
+            Calcular valor factura
+          </button>
+          
+        </div>
+      </div>
+    
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Valor</label>
+        <div class="col">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Valor Total"
+            formControlName="Valor"
+            disabled="disabled"
+          />
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Valor Total con impuestos</label>
+        <div class="col">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Valor Total"
+            formControlName="ValorTotal"
+            disabled="disabled"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group col">
+          <button type="submit" class="btn btn-outline-primary btn-block">
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

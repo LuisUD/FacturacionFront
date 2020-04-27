@@ -1,0 +1,115 @@
+
+<h1>cliente <small>{{nombreCliente}}</small> </h1>
+<hr>
+
+
+<div class="row text-right">
+  <div class="col">
+    <button class="btn btn-danger"
+            routerLink="/clientes">
+      <i class="fa fa-arrow-left"></i>
+      Regresar
+    </button>
+  </div>
+</div>
+
+
+
+<div class="row animated fadeIn faster">
+  <div class="col">
+
+    <form (ngSubmit)="guardar( f )"
+          #f="ngForm">
+
+      <div class="form-group">
+        <label>ID</label>
+        <input type="text"
+               class="form-control"
+               placeholder="ID"
+               [(ngModel)]="cliente.IdCliente"
+               name="id"
+               disabled="disabled">
+        <small class="form-text text-muted">Este campo es autogenerado</small>
+      </div>
+
+      <div class="form-group">
+        <label>Identificacion</label>
+        <input type="text"
+               class="form-control"
+               placeholder="Nombre del cliente"
+               [(ngModel)]="cliente.Identificacion"
+               name="identificacion"
+               required>
+    </div>
+
+      <div class="form-group">
+          <label>Nombre</label>
+          <input type="text"
+                 class="form-control"
+                 placeholder="Nombre del cliente"
+                 [(ngModel)]="cliente.Nombre"
+                 name="nombre"
+                 required>
+      </div>
+
+      <div class="form-group">
+        <label>Apellido</label>
+        <input type="text"
+               class="form-control"
+               placeholder="Apellido"
+               [(ngModel)]="cliente.Apellido"
+               name="apellido"
+               required>
+    </div>
+
+  
+    <div class="form-group">
+      <label>Fecha Nacimiento</label>
+      <input type="text"
+             class="form-control"
+             placeholder="Fecha Nacimiento"
+             [(ngModel)]="cliente.FechaNacimineto"
+             name="fechaNacimineto"
+             required>
+  </div>
+
+  
+  <div class="form-group">
+    <label>Telefono</label>
+    <input type="text"
+           class="form-control"
+           placeholder="telefono"
+           [(ngModel)]="cliente.Telefono"
+           name="telefono"
+           required>
+</div>
+
+    <div class="form-group">
+      <label>direccion</label>
+      <input type="text"
+             class="form-control"
+             [(ngModel)]="cliente.Direccion"
+             name="direccion"
+             placeholder="direccion">
+  </div>
+
+     
+
+
+      <hr>
+      <div class="form-group text-center">
+        <button type="submit"
+                class="btn btn-primary w-25">
+          <i class="fa fa-save"></i>
+          Guardar
+        </button>
+      </div>
+
+
+    </form>
+
+
+  </div>
+</div>
+
+

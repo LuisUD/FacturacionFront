@@ -1,0 +1,111 @@
+<h1>producto <small>Nombre del producto</small></h1>
+<hr />
+
+<div class="row text-right">
+  <div class="col">
+    <button class="btn btn-danger" routerLink="/productos">
+      <i class="fa fa-arrow-left"></i>
+      Regresar
+    </button>
+  </div>
+</div>
+
+<div class="row animated fadeIn faster">
+  <div class="col">
+    <form (ngSubmit)="guardar(f)" #f="ngForm">
+      <div class="form-group">
+        <label>ID</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="ID"
+          [(ngModel)]="producto.IdProducto"
+          name="id"
+          disabled="disabled"
+        />
+        <small class="form-text text-muted">Este campo es autogenerado</small>
+      </div>
+
+      <div class="form-group">
+        <label>Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nombre del producto"
+          [(ngModel)]="producto.Nombre"
+          name="nombre"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Descripcion</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Descripcion del producto"
+          [(ngModel)]="producto.Descripcion"
+          name="descripcion"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Precio</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Precio"
+          [(ngModel)]="producto.Precio"
+          name="precio"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>IVA</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="IVA"
+          [(ngModel)]="producto.IVA"
+          name="IVA"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Cantidad</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Cantidad"
+          [(ngModel)]="producto.Cantidad"
+          name="cantidad"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>PrecioInventario</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Precio Inventario"
+          [(ngModel)]="producto.PrecioInventario"
+          name="PrecioInventario"
+          disabled="disabled"
+        />
+        <small class="form-text text-muted">Este campo es calculado</small>
+      </div>
+
+      <hr />
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary w-25">
+          <i class="fa fa-save"></i>
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

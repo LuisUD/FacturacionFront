@@ -1,0 +1,130 @@
+<h1>Listado de productos</h1>
+<hr />
+
+<div class="row">
+
+  <!--  <div class="col-2">
+    <mat-form-field>
+      <mat-label>producto</mat-label>
+      <mat-select (selectionChange)="onFilter($event.value)">
+        <mat-option>--</mat-option>
+        <mat-option
+          *ngFor="let producto of productos"
+          [value]="producto.Identificacion"
+        >
+          {{ producto.Nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>Edad producto</mat-label>
+        <mat-select (selectionChange)="onFilter('anio', $event.value)">
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let anio of anios" matInput [value]="anio">
+            {{ anio }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>Fecha desde</mat-label>
+        <input matInput [matDatepicker]="fechaInicio" (dateChange)="onFilter('fechaInicio', $event.value)" required/>
+        <mat-datepicker-toggle matSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+        <mat-datepicker #fechaInicio></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>Fecha hasta</mat-label>
+        <input matInput [matDatepicker]="fechaFin" (dateChange)="onFilter('fechaFin', $event.value)" required/>
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="fechaFin"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #fechaFin></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+-->
+  <div class="col text-right">
+    <button routerLink="/producto/nuevo" class="btn btn-primary">
+      <i class="fa fa-plus"></i>
+      Agregar
+    </button>
+  
+  </div>
+</div>
+
+
+<table
+  *ngIf="!cargando && productos.length > 0"
+  class="table mt-3 animated fadeIn faster animated fadeIn faster"
+>
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripción</th>
+      <th scope="col">Precio</th>
+      <th scope="col">IVA</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Precio Inventario</th>
+      <th scope="col">Tools</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let producto of productosFiltrados | async; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ producto.Nombre }}</td>
+      <td>{{ producto.Descripcion }}</td>
+      <td>{{ producto.Precio }}</td>
+      <td>{{ producto.IVA }}</td>
+      <td>{{ producto.Cantidad }}</td>
+      <td>{{ producto.PrecioInventario }}</td>
+
+      <td>
+        <button
+          class="btn btn-info mr-1"
+          [routerLink]="['/producto', producto.IdProducto]"
+        >
+          <i class="fa fa-pen"></i>
+        </button>
+
+        <button class="btn btn-danger" (click)="borrarProducto(producto, i)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div
+  *ngIf="!cargando && productos.length === 0"
+  class="alert alert-warning text-center mt-3 animated fadeIn faster"
+>
+  <h4 class="alert-heading">No hay registros</h4>
+  <p>
+    <i class="fa fa-exclamation fa-2x"></i>
+  </p>
+</div>
+
+<div
+  *ngIf="cargando"
+  class="alert alert-info text-center mt-3 animated fadeIn faster"
+>
+  <h4 class="alert-heading">Cargando</h4>
+  <p>
+    <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+  </p>
+  <p class="mb-0">
+    Espere por favor
+  </p>
+</div>

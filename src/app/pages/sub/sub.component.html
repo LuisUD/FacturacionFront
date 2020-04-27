@@ -1,0 +1,19 @@
+
+
+<td [formGroup]="myForm">
+  <label class="col-form-label">Producto</label>
+    <select formControlName="producto">
+      <option [ngValue]="null" disabled>Escoja un producto</option>
+      <option *ngFor="let producto of productos" [ngValue]="producto.IdProducto">
+       {{ producto.Nombre }}
+      </option>
+    </select> 
+</td>
+<td [formGroup]="myForm">
+    <input class="form-control"  placeholder="cantidad" type="text" formControlName="cantidad"/>
+</td>
+
+
+
+
+  
